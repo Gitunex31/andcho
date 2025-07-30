@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authentification-Recharges.com</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-size: 1.1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    h1 {
+      font-size: 2.5rem;
+    }
+    h2 {
+      font-size: 2.3rem;
+    }
+    h3 {
+      font-size: 1rem;
+    }
+    a {
+      text-decoration: none !important;
+    }
+    
+    .hero-section {
+      background-color:powderblue;
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+    .accordion-button {
+      font-size: 1.1rem;
+    }
+    .accordion-body {
+      font-size: 1rem;
+    }
+
+    .selected-lang {
+        background-color: darkslategrey;
+        border: 1px solid #ccc;
+        padding: 8px 25px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    .lang-options {
+  position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        margin: 5px 0 0;
+        padding: 0;
+        list-style: none;
+        background-color: darkslategrey;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        display: none;
+        z-index: 10;
+}
+
+.lang-options li {
+  padding: 0.5rem 1rem;
+  color: #333333;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-options li:hover {
+        background-color: var(--text-color);
+      }
+.lang-options li:hover {
+  background-color: lightslategrey; /* un gris légèrement plus clair */
+}
+
+.selected-lang {
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <header class="bg-dark text-white py-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <nav>
+        <a class="text-white me-3" href="#">Accueil</a>
+      </nav>
+      <div class="custom-language-selector position-relative">
+        <div class="selected-lang d-flex align-items-center cursor-pointer" onclick="toggleLangMenu()">
+          <img src="https://flagcdn.com/w20/gb.png" alt="EN">
+          <span class="ms-2">English</span>
+        </div>
+        <ul class="lang-options list-unstyled position-absolute border shadow " style="display: none;">
+          <li class="cursor-pointer" onclick="setLang('en')">
+            <img src="https://flagcdn.com/w20/gb.png" alt="EN"> English
+          </li>
+          <li class="cursor-pointer" onclick="setLang('fr')">
+            <img src="https://flagcdn.com/w20/fr.png" alt="FR"> Français
+          </li>
+          <li class="cursor-pointer" onclick="setLang('es')">
+            <img src="https://flagcdn.com/w20/es.png" alt="ES"> Español
+          </li>
+          <li class="cursor-pointer" onclick="setLang('de')">
+            <img src="https://flagcdn.com/w20/de.png" alt="DE"> Deutsch
+          </li>
+          <li class="cursor-pointer" onclick="setLang('it')">
+            <img src="https://flagcdn.com/w20/it.png" alt="IT"> Italiano
+          </li>
+          <li class="cursor-pointer" onclick="setLang('pt')">
+            <img src="https://flagcdn.com/w20/pt.png" alt="PT"> Português
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <section class="hero-section text-center">
+      <div class="container">
+        <h1 data-i18n="hero_title">Bienvenue sur Authentification-Recharges.com</h1>
+        <p data-i18n="hero_text">Vérifiez rapidement l’authenticité de vos tickets, cartes ou codes d’achat. Notre système vous informe instantanément si le code a déjà été utilisé ou non.</p>
+        <a href="#galerie" class="btn btn-primary mt-3" data-i18n="hero_link">Découvrir nos offres</a>
+      </div>
+    </section>
+
+    
+
+    <section id="galerie" class="gallery py-5">
+      <div class="container">
+        <h2 class="text-center mb-4"></h2>
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <a href="form.html"><img class="img-fluid rounded shadow" src="img/transcash.png" alt="Transcash"></a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="form.html"><img class="img-fluid rounded shadow" src="img/pcs.png" alt="PCS"></a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="form.html"><img class="img-fluid rounded shadow" src="img/neosurf.jpg" alt="Neosurf"></a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="form.html"><img class="img-fluid rounded shadow" src="img/steam.jpg" alt="Steam"></a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="form.html"><img class="img-fluid rounded shadow" src="img/google_play.jpg" alt="Google Play"></a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="form.html"><img class="img-fluid rounded shadow" src="img/PaySafeCard.jpg" alt="Paysafe Card"></a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="form.html"><img class="img-fluid rounded shadow" src="img/Amazon.jpg" alt="Amazon"></a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="form.html"><img class="img-fluid rounded shadow" src="img/Playstation_store.jpg" alt="Playstation store"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">FAQ</h2>
+    <div class="accordion" id="faqAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+            <span data-i18n="faq1">Qu'est-ce qu’un ticket de recharge ou un ticket prépayé ?</span>
+          </button>
+        </h2>
+        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body fs-5" data-i18n="faq1r">
+            Un ticket prépayé est un moyen de paiement disponible sous forme de code. Il est souvent utilisé pour acheter des biens ou des services en ligne. Ces tickets offrent une alternative sécurisée aux cartes bancaires traditionnelles.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+            <span data-i18n="faq2">Comment fonctionne la vérification d’un ticket ?</span>
+          </button>
+        </h2>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body fs-5" data-i18n="faq2r">
+            Il vous suffit d’entrer le code de votre ticket sur notre plateforme. Le système analyse alors si ce code a déjà été utilisé ou non. Vous recevez immédiatement un message de confirmation dans votre boîte mail.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+            <span data-i18n="faq3">Quels types de tickets puis-je vérifier ici ?</span>
+          </button>
+        </h2>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body fs-5" data-i18n="faq3r">
+            Notre plateforme prend en charge les tickets de recharge comme Transcash, PCS, Neosurf, et bien d'autres. Vous pouvez aussi vérifier les codes pour Google Play, Amazon, Steam, ou PlayStation. La liste est mise à jour régulièrement pour inclure de nouveaux formats.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+            <span data-i18n="faq4">Comment recevoir un email de confirmation ?</span>
+          </button>
+        </h2>
+        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body fs-5" data-i18n="faq4r">
+            Entrez simplement une adresse e-mail valide dans le formulaire de vérification. Une fois le code soumis, un email vous est automatiquement envoyé. Ce message confirme l’état d’utilisation du ticket.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <div class="mb-2">
+        
+      </div>
+      <h3 class="mb-0" data-i18n="footer_copyright">&copy; 2025 Authentification-Recharges.com Tous droits réservés.</h3>
+    </div>
+  </footer>
+
+  <script src="bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

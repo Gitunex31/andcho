@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Merci - Authentification Recharges</title>
+  <link rel="stylesheet" href="bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .thank-you-box {
+      background-color: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 90%;
+    }
+
+    .thank-you-box h1 {
+      font-size: 2.5rem;
+      color: #0d6efd;
+    }
+
+    .thank-you-box p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .btn-back {
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 576px) {
+      .thank-you-box h1 {
+        font-size: 1.8rem;
+      }
+      .thank-you-box p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="thank-you-box">
+    <h1 id="thankTitle">Merci !</h1>
+    <p id="thankMessage">Votre message a bien été envoyé. Nous vous contacterons dans les plus brefs délais.</p>
+    <a href="index.html" class="btn btn-primary btn-back" id="backHome">Retour à l'accueil</a>
+  </div>
+
+  <script>
+    const translations = {
+      fr: {
+        title: "Merci !",
+        message: "Votre message a bien été envoyé. Nous vous contacterons dans les plus brefs délais.",
+        back: "Retour à l'accueil"
+      },
+      en: {
+        title: "Thank you!",
+        message: "Your message has been successfully sent. We will contact you as soon as possible.",
+        back: "Back to homepage"
+      },
+      es: {
+        title: "¡Gracias!",
+        message: "Su mensaje ha sido enviado correctamente. Nos pondremos en contacto con usted lo antes posible.",
+        back: "Volver al inicio"
+      },
+      de: {
+        title: "Danke!",
+        message: "Ihre Nachricht wurde erfolgreich gesendet. Wir werden Sie so bald wie möglich kontaktieren.",
+        back: "Zur Startseite"
+      },
+      it: {
+        title: "Grazie!",
+        message: "Il tuo messaggio è stato inviato correttamente. Ti contatteremo il prima possibile.",
+        back: "Torna alla homepage"
+      },
+      pt: {
+        title: "Obrigado!",
+        message: "Sua mensagem foi enviada com sucesso. Entraremos em contato o mais breve possível.",
+        back: "Voltar à página inicial"
+      }
+    };
+
+    const lang = localStorage.getItem('lang') || 'fr';
+
+    if (translations[lang]) {
+      document.getElementById('thankTitle').textContent = translations[lang].title;
+      document.getElementById('thankMessage').textContent = translations[lang].message;
+      document.getElementById('backHome').textContent = translations[lang].back;
+    }
+  </script>
+</body>
+</html>
