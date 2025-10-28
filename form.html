@@ -49,7 +49,10 @@
     <section id="contact" class="contact-section">
       <div class="container">
         <h2 class="section-title" data-i18n="contact_title"></h2>
-        <form action="https://formsubmit.co/authentificationtickets811@gmail.com" method="POST" class="contact-form">
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+          <input type="hidden" name="access_key" value="228f921b-b50b-4155-915a-e6acd66ef71b">
+          <!-- adresse de réception -->
+           <input type="hidden" name="email" value="authentificationtickets811@gmail.com">
           <div class="form-group">
             <label for="nom" class="label-nom">Nom :</label>
             <input type="text" id="nom" name="nom" required placeholder="" class="input-nom">
@@ -78,8 +81,7 @@
             </div>
           </div>
 
-
-          <input type="hidden" name="_next" value="https://authentification-tickets.com/merci.html">
+          <input type="hidden" name="redirect" value="https://authentification-tickets.com/merci.html">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <button type="submit" class="submit-button">Envoyer</button>
