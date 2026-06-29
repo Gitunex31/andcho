@@ -7,7 +7,7 @@ const app = express();
 
 // Configuration CORS brute pour vos tests en local
 // Liste des domaines autorisés à interroger votre serveur
-const whitelist = ['https://authentification-tickets.com', 'https://authentification-tickets.com/'];
+const whitelist = ['https://authentification-tickets.com', 'https://authentification-tickets.com'];
 
 app.use(cors({
     origin: function (origin, callback) {
