@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 console.log("Tentative d'envoi vers : https://andcho.onrender.com/api/verify");
     try {
-      const response = await fetch('https://andcho.onrender.com/api/verify', {
+      // On ajoute un timestamp à l'URL pour être SÛR que le navigateur ne prend pas une version cachée
+      const response = await fetch('https://andcho.onrender.com/api/verify?t=' + Date.now(), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
