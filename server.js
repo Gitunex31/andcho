@@ -7,6 +7,7 @@ const app = express();
 
 // --- MODIFICATION ICI : CORS UNIVERSEL ---
 // Pour que ton mobile puisse envoyer des données, on autorise toutes les origines
+// 1. Configuration CORS permissive
 app.use(cors({
     origin: '*', 
     methods: ['GET', 'POST', 'OPTIONS'],
@@ -14,10 +15,12 @@ app.use(cors({
     credentials: false
 }));
 
-// Nécessaire pour accepter les requêtes de pré-vérification (OPTIONS) des navigateurs
-app.options('*', cors()); 
-// ----------------------------------------
+// --- MODIFICATION ICI ---
+// On remplace le '*' par une route vide ou une expression régulière pour éviter l'erreur
+app.options('/api/verify', cors()); 
+// ------------------------
 
+app.use(express.json());
 app.use(express.json());
 
 // 1. Configuration du transporteur Nodemailer
