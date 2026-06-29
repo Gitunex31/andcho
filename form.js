@@ -48,7 +48,8 @@ console.log("Tentative d'envoi vers : https://andcho.onrender.com/api/verify");
 } catch (error) {
   console.error('Erreur technique :', error);
   // Modifie cette ligne pour afficher le vrai message d'erreur (ex: TypeErr: Failed to fetch)
-  alert('Impossible de joindre le serveur de traitement. Détails : ' + error.message);
+  //alert('Impossible de joindre le serveur de traitement. Détails : ' + error.message);
+  alert('Erreur : ' + error.name + ' - ' + error.message);
 }
 });
 });
