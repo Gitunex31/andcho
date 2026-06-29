@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       email: getVal('email'),
       code: getVal('code')
     };
-
+console.log("Tentative d'envoi vers : https://andcho.onrender.com/api/verify");
     try {
       const response = await fetch('https://andcho.onrender.com/api/verify', {
         method: 'POST',
