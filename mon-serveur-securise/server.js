@@ -6,22 +6,23 @@ const nodemailer = require('nodemailer');
 const app = express();
 
 // Configuration CORS brute pour vos tests en local
-app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    if (origin) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    } else {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-    }
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
-});
+// Liste des domaines autorisés à interroger votre serveur
+const whitelist = ['https://authentification-tickets.com', 'https://authentification-tickets.com/'];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // Bloque ou autorise selon la présence du domaine dans la whitelist
+        if (whitelist.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            console.warn(`🛑 Requête bloquée par CORS. Origine non autorisée : ${origin}`);
+            callback(new Error('Non autorisé par la politique CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 
 app.use(express.json());
 
